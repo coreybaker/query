@@ -37,9 +37,13 @@ var baseMap = new Map("esriMap",{
 //but basically you're adding a class to the map div in html 
 //this will allow you to customize the popup via straight CSS opposed to writing it in JS
 //to be awesome at the JS API you must understand what Dojo is doing
-
+//looks like this is adding the class of popup to my div
+//but it is also adding another class of map while my id="esriMap"
+//dojo docs are sort of helping with this....
 
 domClass.add("esriMap", "popup");
+
+
 
 
 
