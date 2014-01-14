@@ -4,19 +4,28 @@
 
 var baseMap;
 
-require (["esri/map","esri/layers/FeatureLayer",
+require (["esri/map",
+"esri/dijit/Popup",
+"esri/dijit/PopupTemplate",
+"dojo/dom-class",
+"dojo/dom-construct",
+"dojo/on",
+"esri/layers/FeatureLayer",
 "dojo/domReady!"
 
 
 	],
 
-function(Map, FeatureLayer){
+function(Map, Popup, PopupTemplate, domClass, domConstruct, dojoOn, FeatureLayer){
 
 baseMap = new Map("esriMap",{
 	center: [-95.643783, 38.729942],
 	zoom: 4, 
 	basemap: "gray"
 }); //end basemap
+
+
+
 
 
 var demographicFeatureLayer = "http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/3";
