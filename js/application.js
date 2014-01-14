@@ -2,7 +2,7 @@
 //using version 3.8 of Esri's JS API
 //build using ok coding practices and lots of heart
 
-var baseMap;
+
 
 require (["esri/map",
 "esri/dijit/Popup",
@@ -18,12 +18,28 @@ require (["esri/map",
 
 function(Map, Popup, PopupTemplate, domClass, domConstruct, dojoOn, FeatureLayer){
 
-baseMap = new Map("esriMap",{
+
+var mapPopup = new Popup({
+	titleInBody:false
+}, domConstruct.create("div"));
+
+
+
+var baseMap = new Map("esriMap",{
 	center: [-95.643783, 38.729942],
 	zoom: 4, 
-	basemap: "gray"
+	basemap: "gray", 
+	infoWindow: Popup 
 }); //end basemap
 
+
+//have to read some dojo docs to fully understand this
+//but basically you're adding a class to the map div in html 
+//this will allow you to customize the popup via straight CSS opposed to writing it in JS
+//to be awesome at the JS API you must understand what Dojo is doing
+
+
+domClass.add("esriMap", "popup");
 
 
 
