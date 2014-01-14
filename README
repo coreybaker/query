@@ -1,0 +1,4 @@
+There isn't really much to say.  This is going to take a service and query it in a map.  
+
+1/14/14: Not sure whether it's going to be a feature service coming from a webmap or just a straight service from ArcGIS for Server.  Using a 
+webmap is going to create more work for me with authorization and more coding.
