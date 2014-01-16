@@ -45,7 +45,8 @@ featureLayerPopup.setContent("<div id='popUpContent'><ul>" +
 		"<li>Population Black: ${BLACK}</li>\n" +
 		"<li>Population Asian: ${ASIAN}</li>\n" +
 		"</ul>" +
-		"</div>");
+		"</div><br>\n" +
+		"We'd love for you to see more");
 
 var fillSymbol = new SFS(SFS.STYLE_SOLID, new SLS(SLS.STYLE_SOLID, new Color([255,0,0]), 2), new Color([255,255,0,0.25])
 		);
