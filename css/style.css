@@ -1,1 +1,9 @@
 /* Custome CSS Styles for the Application */
+
+body {
+	background:dodgerblue;
+}
+
+#mapSection {
+height:4em;
+}

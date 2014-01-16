@@ -5,48 +5,54 @@
 
 
 require (["esri/map",
-"esri/dijit/Popup",
-"esri/dijit/PopupTemplate",
+"esri/InfoTemplate",
+"esri/symbols/SimpleFillSymbol",
+"esri/symbols/SimpleLineSymbol",
+"esri/renderers/SimpleRenderer",
 "dojo/dom-class",
 "dojo/dom-construct",
 "dojo/on",
+"dojo/_base/Color",
 "esri/layers/FeatureLayer",
 "dojo/domReady!"
 
 
 	],
 
-function(Map, Popup, PopupTemplate, domClass, domConstruct, dojoOn, FeatureLayer){
+function(Map, InfoTemplate, SFS, SLS, Render, domClass, domConstruct, dojoOn, Color, FeatureLayer){
 
 
-var mapPopup = new Popup({
-	titleInBody:false
-}, domConstruct.create("div"));
 
 
 
 var baseMap = new Map("esriMap",{
 	center: [-95.643783, 38.729942],
 	zoom: 4, 
-	basemap: "gray", 
-	infoWindow: Popup 
+	basemap: "gray"
 }); //end basemap
 
 
-//have to read some dojo docs to fully understand this
-//but basically you're adding a class to the map div in html 
-//this will allow you to customize the popup via straight CSS opposed to writing it in JS
-//to be awesome at the JS API you must understand what Dojo is doing
-//looks like this is adding the class of popup to my div
-//but it is also adding another class of map while my id="esriMap"
-//dojo docs are sort of helping with this....
+//Where the map popup, fill symbol, and render are defined
 
-domClass.add("esriMap", "popup");
+var featureLayerPopup = new InfoTemplate("Attributes", "${*}");
 
+featureLayerPopup.setTitle("${NAME}");
 
+featureLayerPopup.setContent("<div id='popUpContent'><ul>" +
+		"<li>Population 2007:  ${POP2007}</li>\n" +
+		"<li>Population 2000:  ${POP2000}</li>\n" +
+		"<li>Population White: ${WHITE}</li>" +
+		"<li>Population Black: ${BLACK}</li>\n" +
+		"<li>Population Asian: ${ASIAN}</li>\n" +
+		"</ul>" +
+		"</div>");
 
+var fillSymbol = new SFS(SFS.STYLE_SOLID, new SLS(SLS.STYLE_SOLID, new Color([255,0,0]), 2), new Color([255,255,0,0.25])
+		);
 
+var render = new Render(fillSymbol);
 
+//End map popup, fill symbol, and renderer
 
 var demographicFeatureLayer = "http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Demographics/ESRI_Census_USA/MapServer/3";
 
@@ -56,12 +62,16 @@ var demographicLayerConstruct = new FeatureLayer(demographicFeatureLayer, {
 	outFields: ["*"],
 	id: "2000 Demographics",
 
+
 }); //end featurelayer construction
 
 
-//adds 
+//adds & sets
 
+demographicLayerConstruct.setInfoTemplate(featureLayerPopup);
+demographicLayerConstruct.setRenderer(render);
 baseMap.addLayer(demographicLayerConstruct);
+
 
 
 
