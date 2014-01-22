@@ -4,6 +4,25 @@ body {
 	background:dodgerblue;
 }
 
+#applicationHeader {
+	background:slategray;
+	height:3em;
+}
+
 #mapSection {
 height:4em;
+}
+
+#popUpContent ul li {
+	color:#3B7F43;
+	letter-spacing: 1px;
+	line-height:15px;
+}
+
+.esriPopupWrapper .titlePane {
+	background:#FF504E;
+}
+
+.esriPopupWrapper {
+	background:white;
 }
